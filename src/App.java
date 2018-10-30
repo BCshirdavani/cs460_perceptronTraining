@@ -60,15 +60,23 @@ public class App
 
 				if (O_calc != target){
 					// ... update delta weights here...
-
-
+					double delta_w0 = learningRate * (target - O_calc) * 1;
+					double delta_w1 = learningRate * (target - O_calc) * x2;
+					double delta_w2 = learningRate * (target - O_calc) * x2;
+					w0 += delta_w0;
+					w1 += delta_w1;
+					w2 += delta_w2;
 					missCount ++;
+					System.out.println("Miss Count = " + missCount);
+				}
+				else if (O_calc == target){
+					missCount = 0;
 				}
 			}
 		} while (missCount > 0);
 
 
-
+		System.out.println("out of while loop...");
 		System.out.println(String.format("Finished training:  w0=%f, w1=%f, w2=%f", w0, w1, w2));
 
 		double slope = -w1 / w2;
